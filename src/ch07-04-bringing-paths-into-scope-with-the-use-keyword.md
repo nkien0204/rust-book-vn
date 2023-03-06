@@ -1,4 +1,4 @@
-## Đưa Đường dẫn vào Scope với từ khoá `use`
+## Định nghĩa phạm vi sử dụng cho đường dẫn với từ khoá `use`
 
 Có vẻ như các đường dẫn mà chúng tôi đã viết để gọi các hàm cho đến nay là dài 
 và lặp đi lặp lại một cách bất tiện. Ví dụ: trong Listing 7-7, 
@@ -7,7 +7,7 @@ mỗi khi chúng ta muốn gọi` add_to_waitlist`, chúng ta cũng phải chỉ
 May mắn thay, có một cách để đơn giản hóa quy trình này. Chúng ta có thể tạo một lối tắt đến một đường dẫn với từ khóa `use` một lần,
 sau đó sử dụng tên ngắn hơn ở mọi nơi khác trong scope.
 
-Trong Listing 7-11, chúng tôi đưa module `crate :: front_of_house :: hosting` vào scope của hàm` eat_at_restaurant`
+Trong Listing 7-11, chúng ta đưa module `crate :: front_of_house :: hosting` vào scope của hàm` eat_at_restaurant`
 vì vậy chúng tôi chỉ phải chỉ định `hosting :: add_to_waitlist` để gọi hàm` add_to_waitlist` trong `eat_at_restaurant`.
 
 <span class="filename">Filename: src/lib.rs</span>

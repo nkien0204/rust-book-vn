@@ -1,8 +1,15 @@
-## Method
+## Phương thức (method)
+---
+Các thuật ngữ:
+- **block**: Khối lệnh {}
+- **Asscociated Functions**: Hàm liên kết
+- **Method**: Phương thức
+---
+
 
 *Method* (phương thức) khá tương đồng với *functions* (hàm) ở điểm: đều sử dụng từ khóa `fn` kèm theo tên, đều có tham số truyền vào và giá trị trả về, đều chứa các đoạn code để thực thi khi được gọi trong chương trình. Điểm khác biệt với functions ở chỗ, methods được định nghĩa ở bên trong struct (có thể là enum hoặc trait, ta sẽ đi sâu hơn trong chương 6 và 17); tham số đầu tiên của method luôn là `self`, đại diện cho instance của struct đó.
 
-### Định nghĩa Methods
+### Định nghĩa phương thức
 
 Biến đổi hàm `area` thành phương thức `area` như sau:
 
@@ -14,7 +21,7 @@ Biến đổi hàm `area` thành phương thức `area` như sau:
 
 <span class="caption">Listing 5-13: Định nghĩa một phương thức `area` thuộc struct `Rectangle`</span>
 
-Để định nghĩa các phương thức của `Rectangle`, ta sẽ sử dụng từ khóa `impl` (implementation) kèm theo một block của `Rectangle`. Mọi thứ ở trong `impl` block sẽ thuộc về `Rectangle`. Tiếp theo, đưa hàm `area` vào bên trong `impl` block và thêm `self` vào làm tham số đầu tiên của hàm đó. Trong hàm `main`, sử dụng *method syntax* để gọi phương thức `area` của `Rectangle` instance. Cú pháp ở đây được sử dụng bằng cách thêm dấu chấm sau khi gọi instance.
+Để định nghĩa các phương thức của `Rectangle`, ta sẽ sử dụng từ khóa `impl` (implementation) kèm theo một cú pháp {} (block) của `Rectangle`. Mọi thứ ở trong `impl` block sẽ thuộc về `Rectangle`. Tiếp theo, đưa hàm `area` vào bên trong `impl` block và thêm `self` vào làm tham số đầu tiên của hàm đó. Trong hàm `main`, sử dụng *method syntax* để gọi phương thức `area` của `Rectangle` instance. Cú pháp ở đây được sử dụng bằng cách thêm dấu chấm sau khi gọi instance.
 
 Phần khai báo của `area`, ta sử dụng `&self` thay vì `rectangle: &Rectangle`, `&self` là viết tắt của `self: &Self`. Ở trong `impl` block, `Self` đại diện cho kiểu dữ liệu mà nó được implement. Method phải có tham số `self` ở đầu tiên, vì vậy Rust giúp ta viết thuận tiện hơn với việc chỉ cần `&self` thay vì `self: &Self`. Để ý rằng vẫn cần có `&` ở trước `self` để báo hiệu việc mượn instance. Method có thể chiếm quyền sở hữu của `self`, vì vậy ta cần cân nhắc khi sử dụng.
 
@@ -94,7 +101,7 @@ Method mới này cũng sẽ được đặt trong `impl Rectangle` block. Đặ
 
 <span class="caption">Listing 5-15: Implementing `can_hold` method của struct `Rectangle`</span>
 
-### Associated Functions
+### Hàm liên kết (Associated Functions)
 
 Tất cả các hàm được định nghĩa bên trong `impl` đều được gọi là *associated functions* vì chúng đều có liên quan đến struct được `impl`. Ta có thể định nghĩa associated functions mà không có `self` làm tham số truyền vào (do đó không gọi là methods) vì chúng không cần instance của struct đó để hoạt động. Ví dụ như hàm `from` trong `String::from` là một associated function.
 

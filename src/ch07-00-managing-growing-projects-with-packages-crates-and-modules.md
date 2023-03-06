@@ -1,4 +1,4 @@
-# Quản lý các dự án đang phát triển Packages, Crates, and Modules
+# Quản lý các dự án lớn với Packages, Crates, and Modules
 
 Khi bạn viết các chương trình lớn, tổ chức code của bạn sẽ rất quan trọng vì 
 theo dõi toàn bộ chương trình của bạn trong đầu sẽ trở nên không thể.
@@ -37,8 +37,7 @@ Những tính năng này, đôi khi được gọi chung là *module system*, ba
 * **Modules** and **use:** để bạn kiểm soát tổ chức (dự án), phạm vi và quyền riêng tư của các đường dẫn
 * **Paths:** một cách để đặt tên một item, chẳng hạn như một struct, function hoặc module
 
-Trong chương này, chúng tôi sẽ đề cập tới tất cả các tính năng trên, bàn luận về cách chúng tương tác 
-và giải thích cách sử dụng chúng để quản lý scope. Cuối cùng, bạn nên có một sự hiểu biết vững chắc về 
-module system và có thể làm việc với scope như một chuyên gia
+Trong chương này, chúng ta sẽ đề cập tới tất cả các tính năng trên, bàn luận về cách chúng tương tác 
+và giải thích cách sử dụng chúng để quản lý phạm vi. Cuối cùng, bạn nên có một sự hiểu biết vững chắc về phân chia module để có thể làm việc một cách hiệu quả.
 
 [workspaces]: ch14-03-cargo-workspaces.html

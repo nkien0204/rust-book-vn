@@ -1,4 +1,4 @@
-# Enums and Pattern Matching
+# Enums và Mẫu Matching
 
 Trong chương này chúng ta sẽ tìm hiểu về *enumerations*, còn được gọi là *enums*.
 Enums cho phép bạn có thể định nghĩa  một kiểu dữ liệu bằng cách liệt kê *các kiểu dữ liệu* của nó. Đầu tiên,

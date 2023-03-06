@@ -1,5 +1,9 @@
 ## Định nghĩa và khởi tạo Structs
 
+Một số thuật ngữ:
+- **instance**: thực thể
+- **mutable**: có thể thay đổi được
+
 Structs tương tự như tuples (trình bày tại phần ["The Tuple Type"][tuples]<!-- ignore -->), đó là chúng đều giữ các giá trị có mối liên hệ với nhau. Một điểm chung nữa đó là các thành phần bên trong struct và tuple có thể khác kiểu dữ liệu. Tuy nhiên, sự khác nhau cơ bản ở đây là các phần tử trong struct sẽ được đặt tên tương ứng cho từng trường, làm cho struct sẽ có ý nghĩa rõ ràng hơn so với tuple. Có thể gán tên đồng nghĩa với việc struct sẽ linh hoạt hơn tuple: ví dụ, bạn sẽ không phải dựa vào thứ tự của các phân tử để truy cập giá trị.
 
 Để định nghĩa một struct, chúng ta sử dụng từ khóa `struct` kèm theo tên struct đó. Tên của struct nên đặt một cách gợi nhớ và có ý nghĩa. Sau đó, bên trong cặp ngoặc nhọn, ta sẽ định nghĩa tên và kiểu dữ liệu cho từng phần tử , hay "trường dữ liệu" (được gọi là *field*) trong struct đó. Ví dụ, mục 5-1 thể hiện một struct lưu trữ thông tin về một tài khoản của người dùng.
@@ -26,7 +30,7 @@ Structs tương tự như tuples (trình bày tại phần ["The Tuple Type"][tu
 
 <span class="caption">Listing 5-3: Thay đổi email trong instance "User"</span>
 
-Chú ý rằng instance này phải thay đổi được (mutable); Rust không cho phép chúng ta đánh dấu mutable cho các trường dữ liệu bên trong struct. Ta cũng có thể tạo ra một instance và đặt nó ở cuối của thân hàm (last expression) để ngầm định giá trị trả về cho hàm đó.
+Chú ý rằng instance(thực thể) này phải thay đổi được (mutable); Rust không cho phép chúng ta đánh dấu mutable cho các trường dữ liệu bên trong struct. Ta cũng có thể tạo ra một instance và đặt nó ở cuối của thân hàm (last expression) để ngầm định giá trị trả về cho hàm đó.
 
 Listing 5-4 cho ta thấy một hàm `build_user` trả về một `User` instance với email và username. Trường `active` có giá trị `true` và trường `sign_in_count` có giá trị 1.
 
@@ -129,7 +133,7 @@ Bạn có thể định nghĩa một struct mà không hề có bất kì một 
 >
 > Compiler sẽ nói rằng bạn cần dùng lifetime:
 >
-> 
+> p
 > ```console
 > $ cargo run
 >    Compiling structs v0.1.0 (file:///projects/structs)

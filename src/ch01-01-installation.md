@@ -1,14 +1,14 @@
 ## Cài đặt
 
-Đầu tiên chúng ta phải cài Rust. Chúng ta sẽ cài Rust thông qua `rustup` - Command line tool 
-quản lý phiên bản Rust và các tool liên quan.
+Đầu tiên chúng ta phải cài Rust. Cách cài đặt đơn giản là sử dụng `rustup` - Command line tool 
+quản lý phiên bản Rust và các công cụ liên quan.
 
 > Note: Nếu bạn không muốn dùng `rustup`, hãy truy cập
 > [Other Rust Installation Methods page][otherinstall] để có xem các lựa chọn khác.
 
 [otherinstall]: https://forge.rust-lang.org/infra/other-installation-methods.html
 
-Các bước sau cài phiên bản ổn định mới nhất của Rust compiler. Phiên bản ổn định của Rust đảm bảo các ví
+Các bước sau cài phiên bản ổn định mới nhất của trình biên dịch Rust (Rust compiler). Phiên bản ổn định của Rust đảm bảo các ví
 dụ trong sách có thể biên dịch với phiên bản Rust mới hơn. Tuy nhiên ouput có thể khác 1 chút giữa
 các phiên bản, bởi vì Rust thường xuyên cải thiện các message lỗi và cảnh báo.
 

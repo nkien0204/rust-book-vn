@@ -2,7 +2,7 @@
 
 Sau khi cài đặt Rust, hãy viết chương trình Rust đầu tiên hiển thị `Hello, world!`
 
-### Tạo một Project Directory
+### Tạo một chương trình -  Thư mục chương trình
 
 Bạn sẽ bắt đầu bằng tạo một thư mục để lưu trữ Rust code. Bạn có thể lưu trữ nó ở bất kì đâu,
 tuy nhiên cho các bài tập trong sách này, bạn nên để đường dẫn ở thư mục home.
@@ -153,5 +153,5 @@ cần cài đặt Rust. Nếu bạn đưa người khác một file *.rb*, *.py*
 biên dịch và chạy chỉ với 1 câu lệnh. 
 
 Biên dịch với `rustc` chỉ dành cho chương trình đơn giản. Khi project phát triển, sẽ rất phức tạp khi quản lý các options.
-Cargo tool sẽ giúp ta việc đó.
+Công cụ quản lý package - Cargo sẽ giúp ta việc đó.
 

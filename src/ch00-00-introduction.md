@@ -1,4 +1,4 @@
-# Introduction
+# Giới thiệu
 
 > Note: This edition of the book is the same as [The Rust Programming
 > Language][nsprust] available in print and ebook format from [No Starch
@@ -9,16 +9,16 @@
 
 Chào mừng bạn đến với *The Rust Programming Language*, một cuốn sách giới thiệu về Rust.
 Ngôn ngữ lập trình Rust giúp bạn viết phần mềm nhanh hơn, đáng tin cậy hơn.
-High-level ergonomics and low-level control thường mâu thuẫn nhau trong thiết kế ngôn
+High-level ergonomics(Thiết kế tối ưu mức cao) and low-level control(Điều khiển mức thấp) thường mâu thuẫn nhau trong thiết kế ngôn
 ngữ lập trình; Rust thách thức xung đột đó. Thông qua việc cân bằng giữa năng lực kỹ thuật
 mạnh mẽ và kinh nghiệm tuyệt vời của nhà phát triển, Rust cho bạn tùy chọn để kiểm soát
 các chi tiết cấp thấp (chẳng hạn như sử dụng bộ nhớ) mà không gặp phải mọi rắc rối
 truyền thống liên quan đến việc kiểm soát như vậy.
 
-## Rust dành cho ai
+## Rust dành cho đối tượng nào ?
 
-Rust là lý tưởng cho nhiều người vì nhiều lý do. 
-Hãy xem xét một số nhóm quan trọng nhất.
+Rust là phù hợp cho nhiều mục đích lập trình khác nhau và cho nhiều nhóm đối tượng
+Hãy xem xét một số nhóm đối tượng chính:
 
 ### Nhóm các developer
 
@@ -176,3 +176,6 @@ Bạn có thể tìm thấy các file nguồn mà cuốn sách này được t�
 [GitHub][book].
 
 [book]: https://github.com/rust-lang/book/tree/main/src
+
+
+[]
