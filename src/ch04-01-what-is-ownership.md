@@ -1,5 +1,14 @@
 ## What Is Ownership?
 
+
+---
+Một số thuật ngữ:
+
+- ownership: 
+- scope: phạm vi, tầm vực
+- stack và heap: vùng bộ nhớ trong máy tính lưu trữ biến
+---
+
 *Ownership* là một tập hợp các quy tắc chi phối cách một chương trình Rust quản lý bộ nhớ.
 Tất cả các chương trình phải quản lý cách chúng sử dụng bộ nhớ của máy tính khi chạy.
 Một số ngôn ngữ có garbage collection (bộ thu thập rác) liên tục tìm kiếm bộ nhớ không còn được sử dụng khi chương trình chạy; trong các ngôn ngữ khác, lập trình viên phải cấp phát và giải phóng bộ nhớ một cách rõ ràng. Rust sử dụng cách tiếp cận thứ ba: bộ nhớ được quản lý thông qua một hệ thống sở hữu (system of ownership) với một tập hợp các quy tắc mà trình biên dịch kiểm tra khi biên dịch. Nếu bất kỳ quy tắc nào bị vi phạm, chương trình sẽ không biên dịch. Không có tính năng nào của ownership sẽ làm chậm chương trình của bạn khi nó đang chạy.
@@ -275,7 +284,7 @@ Vậy, những loại nào triển khai `Copy` trait? Bạn có thể kiểm tra
 
 Nếu chúng ta cố gắng sử dụng `s` sau khi gọi `takes_ownership`, Rust sẽ báo lỗi biên dịch. Những kiểm tra tĩnh này bảo vệ chúng ta khỏi những sai lầm. Thử thêm code vào `main` sử dụng `s` và `x` để xem bạn có thể sử dụng chúng ở đâu và các quy tắc ownership ngăn bạn làm điều đó ở đâu.
 
-### Trả về giá trị và Scope
+### Trả về giá trị và (Tầm vực - Phạm vi) Scope
 
 Giá trị trả về cũng có thể chuyển giao ownership. Listing 4-4 hiển thị một ví dụ về một hàm trả về một số giá trị, với các chú thích tương tự như trong Listing 4-3.
 

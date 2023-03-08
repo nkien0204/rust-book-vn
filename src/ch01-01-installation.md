@@ -49,7 +49,7 @@ Cách dễ nhất là cài [Build Tools for Visual Studio 2019][visualstudio]. H
 [install]: https://www.rust-lang.org/tools/install
 [visualstudio]: https://visualstudio.microsoft.com/visual-cpp-build-tools/
 
-### Cập nhật và gỡ cài đặt
+### Cập nhật và gỡ cài đặt 
 
 Sau khi cài Rust bằng `rustup`, bạn có thể cập nhật phiên bản mới nhất bằng lệnh:
 
@@ -63,7 +63,7 @@ $ rustup update
 $ rustup self uninstall
 ```
 
-### Xử lý sự cố
+### Xử lý sự cố (Troubleshouting)
 
 Để kiểm tra bạn đã cài đặt Rust đúng chưa:
 

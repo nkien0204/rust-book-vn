@@ -11,9 +11,9 @@
     - [Chương trình đầu tiên 'Hello, World!'](ch01-02-hello-world.md)
     - [Cargo](ch01-03-hello-cargo.md)
 
-- [Lập trình một trò chơi đoán chữ](ch02-00-guessing-game-tutorial.md)
+- [Lập trình một trò chơi đoán số](ch02-00-guessing-game-tutorial.md)
 
-- [Nguyên lý chung của của ngôn ngữ](ch03-00-common-programming-concepts.md)
+- [Nguyên lý chung của ngôn ngữ Rust](ch03-00-common-programming-concepts.md)
     - [Biến và Sự Biến đổi (Mutability)](ch03-01-variables-and-mutability.md)
     - [Kiểu dữ liệu](ch03-02-data-types.md)
     - [Hàm](ch03-03-how-functions-work.md)
@@ -37,7 +37,7 @@
 
 ## Rust Cơ bản
 
-- [Quản lý Dự Án Lớn với packages (gói), crates (nhóm các packages) và modules (mức module)](ch07-00-managing-growing-projects-with-packages-crates-and-modules.md)
+- [Quản lý Dự Án Lớn với packages (gói), crates (mức crates) và modules (mức module)](ch07-00-managing-growing-projects-with-packages-crates-and-modules.md)
     - [Packages và Crates](ch07-01-packages-and-crates.md)
     - [Định nghĩa module với chính sách riêng tư (privacy)](ch07-02-defining-modules-to-control-scope-and-privacy.md)
     - [Truy xuất tới item trong module (Module Tree)](ch07-03-paths-for-referring-to-an-item-in-the-module-tree.md)

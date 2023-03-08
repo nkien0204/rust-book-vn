@@ -1,64 +1,46 @@
-## Storing UTF-8 Encoded Text with Strings
+## Lưu trữ UTF-8 Encoded Text (Chữ định dạng UTF-8) với kiểu Strings
 
-We talked about strings in Chapter 4, but we’ll look at them in more depth now.
-New Rustaceans commonly get stuck on strings for a combination of three
-reasons: Rust’s propensity for exposing possible errors, strings being a more
-complicated data structure than many programmers give them credit for, and
-UTF-8. These factors combine in a way that can seem difficult when you’re
-coming from other programming languages.
+Chúng ta đã nói về `string` trong chương 4, nhưng chúng sẽ xem xét kỹ lưỡng chúng bây giờ.
+Một Rustaceans mới thường gặp rắc rối với string khi kết hợp 3 thứ sau: Biểu thị lỗi trong string, 
+string là cấu trúc dữ liệu phức tạp và thứ 3: UT8. 
+Ba nhân tố này kết hợp thành thứ mà dường như khó khi bạn đến từ một ngôn ngữ khác.
 
-We discuss strings in the context of collections because strings are
-implemented as a collection of bytes, plus some methods to provide useful
-functionality when those bytes are interpreted as text. In this section, we’ll
-talk about the operations on `String` that every collection type has, such as
-creating, updating, and reading. We’ll also discuss the ways in which `String`
-is different from the other collections, namely how indexing into a `String` is
-complicated by the differences between how people and computers interpret
-`String` data.
+Chúng ta thảo luận string trong ngữ cảnh collections bởi vì strings được coi như một tập hợp của các bytes, vài phương 
+thức thêm vào cung cấp chức năng hữu dụng khi bytes của nó được coi như là text. Trong chương này, chúng ta sẽ nói về 
+những điều khiển trong `String` (kiểu dữ liệu) mà mọi kiểu collection có, giống như việc tạo, cập nhật, và đọc. Chúng ta cũng sẽ bàn về các cách nơi
+`String` là khác với các kiểu collection khác, cách indexing thành một `String` là phức tạp bởi sự khác nhau giữa cách người và máy tính giải thích kiểu 
+`String`;
 
-### What Is a String?
 
-We’ll first define what we mean by the term *string*. Rust has only one string
-type in the core language, which is the string slice `str` that is usually seen
-in its borrowed form `&str`. In Chapter 4, we talked about *string slices*,
-which are references to some UTF-8 encoded string data stored elsewhere. String
-literals, for example, are stored in the program’s binary and are therefore
-string slices.
+### String là gì?
 
-The `String` type, which is provided by Rust’s standard library rather than
-coded into the core language, is a growable, mutable, owned, UTF-8 encoded
-string type. When Rustaceans refer to “strings” in Rust, they might be
-referring to either the `String` or the string slice `&str` types, not just one
-of those types. Although this section is largely about `String`, both types are
-used heavily in Rust’s standard library, and both `String` and string slices
-are UTF-8 encoded.
+Đầu tiên, Chúng ta sẽ định nghĩa thuật ngữ *string*. Rust chỉ có một kiểu string trong ngôn ngữ, nơi nó là dạng `slice` `str` mà thường 
+được coi biểu thị trong `&str` (mượn). Trong chương 4, chúng ta đã nói về *string slices*, mà là tham chiếu tới dữ liệu text định dạng UTF-8. String, bản chất
+ví dụ, là được lưu trữ trong tệp nhị phân và do đó là `string slices`
 
-Rust’s standard library also includes a number of other string types, such as
-`OsString`, `OsStr`, `CString`, and `CStr`. Library crates can provide even
-more options for storing string data. See how those names all end in `String`
-or `Str`? They refer to owned and borrowed variants, just like the `String` and
-`str` types you’ve seen previously. These string types can store text in
-different encodings or be represented in memory in a different way, for
-example. We won’t discuss these other string types in this chapter; see their
-API documentation for more about how to use them and when each is appropriate.
+Kiểu `String`, nơi được cung cấp bởi thư viện chuẩn của Rust hơn là được lập trình thành ngôn ngữ core, là một kiểu chuỗi (string) có thể mở rộng, thay đổi, owned,
+định dạng UTF8. Khi lập trình viên Rust (Rustaceans) tham chiếu "string" trong Rust, họ có thể đang tham chiếu tới kiểu `String` hoặc kiểu `&str`, hoặc không phải một 
+trong 2 kiểu trên. Mặc dù chương này mục đích chính là về `String`, cả 2 kiểu là được sử dụng nhiều trong thư viện chuẩn Rust, và cả `String` 
+và `slices` là dưới dạng UTF8-encoded
 
-### Creating a New String
+Thư viện chuẩn Rust cũng bao gồm một số kiểu string khác, giống như `OsString`, `OsStr`, `CString`, và `CStr`. Những thư viện craté có thể cung cấp cả nhiều lựa chọn
+cho việc lưu trữ dữ liệu dạng string. Nhìn cách kiểu kia đều kết thức với `String` hoặc `Str`?. Chúng tahm chiếu tới biến hoặc sở hữu hoặc mượn, cũng giống `String` và
+`str` bạn đã nhìn thầy trước đó. Các kiểu string này có thể lưu trữ text trong định dạng mã hoá khác nhau hoặc được thể hiện trong bộ nhớ theo một cách nào đó. Ví dụ, Chúng
+ta sẽ không thảo luận các kiểu dữ liệu này trong chương này; xem tài liệu của chúng nhiều hơn hoặc cách sử dụng để biết cách khi nào sử dụng chúng một cách thích hợp.
 
-Many of the same operations available with `Vec<T>` are available with `String`
-as well, starting with the `new` function to create a string, shown in Listing
-8-11.
+### Tạo một String 
+
+Nhiều thao tác với `Vec<T>` cũng được sử dụng với `String`, ví dụ hàm `new` để tạo một string, xem Listing 8-11
 
 ```rust
 {{#rustdoc_include ../listings/ch08-common-collections/listing-08-11/src/main.rs:here}}
 ```
 
-<span class="caption">Listing 8-11: Creating a new, empty `String`</span>
+<span class="caption">Listing 8-11: Tạo mới một `String` rỗng </span>
 
-This line creates a new empty string called `s`, which we can then load data
-into. Often, we’ll have some initial data that we want to start the string
-with. For that, we use the `to_string` method, which is available on any type
-that implements the `Display` trait, as string literals do. Listing 8-12 shows
-two examples.
+Dòng này tạo một mới một string rỗng và gán tới `s`. Thông thường, chúng ta sẽ khởi tạo với một giá trị mà chúng ta muốn
+Để làm điều này, chúng ta có thể sử dụng phương thức `to_string`, mà nó có trong tất cả các kiểu mà thực hiện trait `Display`, và string cũng thế. Listing 8-12 xem xét 2 ví dụ
+
 
 ```rust
 {{#rustdoc_include ../listings/ch08-common-collections/listing-08-12/src/main.rs:here}}
@@ -77,28 +59,22 @@ that uses `to_string`.
 {{#rustdoc_include ../listings/ch08-common-collections/listing-08-13/src/main.rs:here}}
 ```
 
-<span class="caption">Listing 8-13: Using the `String::from` function to create
-a `String` from a string literal</span>
+<span class="caption">Listing 8-13: Sử dụng hàm  `String::from` để tạo `String` từ một string gốc(lietrary)</span>
+Bởi vì chuỗi được sử dụng cho nhiều thứ, chúng ta có thể sử dụng generic khác nhau cho string, đưa đến cho 
+chúng ta nhiều lựa chọn. Một trong số đó dường như hơi thừa thãi, nhưng không sao cả. Trong trường hợp này, `String::from` và `to_string` cùng hành động giống nhau, do đó bạn có thể chọn phương thức nào cũng được phụ thuộc vào bạn.
+Nhớ rằng strings là có định dạng mã hoá UTF-8, do dó chúng có bao gồm bất kỳ dữ liệu mã hoá trong đó, Listing 8-14 là ví dụ
 
-Because strings are used for so many things, we can use many different generic
-APIs for strings, providing us with a lot of options. Some of them can seem
-redundant, but they all have their place! In this case, `String::from` and
-`to_string` do the same thing, so which you choose is a matter of style and
-readability.
-
-Remember that strings are UTF-8 encoded, so we can include any properly encoded
-data in them, as shown in Listing 8-14.
 
 ```rust
 {{#rustdoc_include ../listings/ch08-common-collections/listing-08-14/src/main.rs:here}}
 ```
 
-<span class="caption">Listing 8-14: Storing greetings in different languages in
-strings</span>
+<span class="caption">Listing 8-14: Lưu trữ câu lời chào trong các ngôn ngữ khác nhau</span>
 
-All of these are valid `String` values.
+Tất cả chúng là giá trị `String` hợp lệ
 
-### Updating a String
+
+### Cập nhật một String 
 
 A `String` can grow in size and its contents can change, just like the contents
 of a `Vec<T>`, if you push more data into it. In addition, you can conveniently

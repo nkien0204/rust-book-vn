@@ -1,4 +1,9 @@
-## References và Borrowing
+## Tham chiếu và nguyên lý mượn - borrowing (References và Borrowing)
+
+---
+Data races: Chạy đua dữ liệu, chỉ hiện tượng các đoạn code khác nhau cùng đòi quyền sử dụng một biến hay một vùng bộ nhớ 
+
+---
 
 Vấn đề với tuple trong Listing 4-5 là chúng ta phải trả lại `String` cho hàm gọi vì vậy chúng ta vẫn có thể sử dụng `String` sau khi gọi `calculate_length`, vì `String` đã được chuyển đến `calculate_length`. Thay vào đó, chúng ta có thể cung cấp một tham chiếu (reference) đến giá trị của `String`.
 Một *tham chiếu* (reference) giống như một con trỏ ở chỗ đó là một địa chỉ mà chúng ta có thể đi theo để truy cập vào dữ liệu được lưu trữ tại địa chỉ thuộc sở hữu của một số biến khác. Không giống như một con trỏ, một tham chiếu được đảm bảo trỏ đến một giá trị hợp lệ của một kiểu cụ thể. Đây là cách bạn sẽ xác định và sử dụng một hàm `calculate_length` có tham chiếu đến một đối tượng dưới dạng tham số thay vì dùng ownership để có quyền sở hữu giá trị:
@@ -88,7 +93,7 @@ Hạn chế ngăn nhiều tham chiếu có thể thay đổi đến cùng một 
 * Ít nhất một trong các con trỏ đang được sử dụng để ghi vào dữ liệu.
 * Không có cơ chế nào được sử dụng để đồng bộ hóa quyền truy cập vào dữ liệu.
 
-Data races gây ra hành vi không xác định (undefined behavior) và có thể khó chẩn đoán và khắc phục khi bạn đang cố gắng theo dõi chúng trong runtime; Rust ngăn chặn vấn đề này bằng cách từ chối biên dịch code với data races!
+Chạy đua dữ liệu (Data races) gây ra hành vi không xác định (undefined behavior) và có thể khó chẩn đoán và khắc phục khi bạn đang cố gắng theo dõi chúng trong runtime; Rust ngăn chặn vấn đề này bằng cách từ chối biên dịch code với data races!
 
 Như mọi khi, chúng ta có thể sử dụng dấu ngoặc nhọn để tạo một phạm vi mới, cho phép nhiều tham chiếu có thể thay đổi, chỉ là những tham chiếu không được xảy ra *đồng thời*:
 
@@ -120,7 +125,7 @@ Phạm vi của các tham chiếu bất biến `r1` và `r2` kết thúc sau `pr
 
 Mặc dù đôi khi lỗi borrowing có thể khiến bạn bực bội, hãy nhớ rằng đó là trình biên dịch Rust chỉ ra một lỗi tiềm ẩn sớm (tại tại thời điểm biên dịch thay vì tại runtime) và cho bạn thấy chính xác vấn đề nằm ở đâu. Sau đó, bạn không phải theo dõi lý do tại sao dữ liệu của bạn không giống như bạn nghĩ nữa.
 
-### Tham chiếu treo (Dangling References)
+### Tham chiếu treo (Hoặc Tham chiếu lạc) (Dangling References)
 
 Trong các ngôn ngữ có con trỏ, rất dễ tạo sai một *con trỏ treo* (dangling pointer)--một con trỏ tham chiếu đến một vị trí trong bộ nhớ có thể đã được cấp cho người khác--bằng cách giải phóng một số bộ nhớ trong khi vẫn bảo toàn con trỏ tới bộ nhớ đó. Ngược lại, trong Rust, trình biên dịch đảm bảo rằng các tham chiếu sẽ không bao giờ là tham chiếu treo (dangling references): nếu bạn có tham chiếu đến một số dữ liệu, trình biên dịch sẽ đảm bảo rằng dữ liệu sẽ không vượt ra khỏi phạm vi trước khi tham chiếu đến dữ liệu đó.
 

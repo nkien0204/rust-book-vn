@@ -1,4 +1,4 @@
-## Comments
+## Chú thích (Comments)
 
 Tất cả lập trình viên đều cố gắng làm cho code dễ hiểu, nhưng đôi khi cần
 những lời giải thích thêm. Trong các trường hợp này, lập trình viên sẽ để

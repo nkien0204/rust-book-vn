@@ -1,4 +1,4 @@
-## Defining Modules to Control Scope and Privacy
+## Định nghĩa module với chính sách và phạm vi truy cập (privacy)
 
 Trong phần này, chúng ta sẽ nói về modules và các phần khác của module system,
 cụ thể là *paths* cho phép bạn đặt tên cho các mục; từ khóa `use` đưa ra một
@@ -8,7 +8,7 @@ về từ khóa `as`, external packages, và toán tử toàn cục.
 Đầu tiên, chúng ta sẽ bắt đầu với một danh sách các quy tắc để dễ dàng tham khảo. Khi bạn tổ chức code của mình trong tương lai.
 Sau đó, chúng tôi sẽ giải thích chi tiết từng quy tắc.
 
-### Modules Quick Reference
+### Tham chiếu tới module một cách ngắn gọn (Modules Quick Reference)
 
 Đây là cách mà modules, paths, từ khóa `use`, và từ khóa `pub` hoạt động trong
 trình biên dịch, và làm thế nào hầu hết các developer tổ chức code của họ. 
@@ -83,7 +83,7 @@ Và `pub mod vegetables;` có nghĩa là code trong *src/garden/vegetables.rs* c
 
 Bây giờ, hãy cùng tìm hiểu chi tiết về các quy tắc này và chứng minh chúng trong thực tế!
 
-### Grouping Related Code in Modules
+### Nhóm code liên quan thành một modules (Grouping Related Code in Modules)
 
 *Modules* hãy tổ chức code của bạn trong một crate thành các group để dễ dàng đọc và sử dụng lại.
 Các module cũng kiểm soát *privacy* của các mục, đó là một mục có thể sử dụng

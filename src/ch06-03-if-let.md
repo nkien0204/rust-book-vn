@@ -1,4 +1,4 @@
-## Quy trình kiểm soát ngắn gọn với `if let`
+## Cú pháp kiểm tra biến với `if let`
 
 Cú pháp `if let` cho phép bạn kết hợp `if` và `let` thành một cách ít dài dòng hơn để xử lý các giá trị khớp với một mẫu trong khi bỏ qua phần còn lại. 
 Xem xét chương trình trong Listing 6-6 phù hợp với một giá trị `Option<u8>` trong `config_max`

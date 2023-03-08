@@ -1,8 +1,7 @@
-## Control Flow
+## Luồng điều khiển (Control Flow)
 
-Khả năng chạy code phụ thuộc vào một điều kiện là đúng hoặc chạy code lặp đi lặp
-lại trong khi điều kiện đúng là các khối xây dựng cơ bản trong hầu hết ngôn ngữ 
-lập trình. Các cấu trúc phổ biến nhất cho phép bạn kiểm soát luồng thực thi code
+Luồng điều khiển sẽ quyết định cách code của chúng ta được hoạt động như thế nào.
+ Các cấu trúc phổ biến nhất cho phép bạn kiểm soát luồng thực thi code
 của Rust là biểu thức `if` và vòng lặp (loops).
 
 ### Biểu thức `if`

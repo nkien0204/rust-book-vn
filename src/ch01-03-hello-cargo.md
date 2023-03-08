@@ -2,7 +2,7 @@
 
 Cargo là hệ thống build và quản lý thư viện của Rust. Hầu hết Rust coder - Rustaceans đều sử
 dụng Cargo để quản lý project của họ bởi vì Cargo xử lý nhiều tác vụ cho bạn ví dụ như: build code,
-tải thư viện, và build những thư viện đó. (Chúng ta gọi những thư viện mà code của bạn cần là những dependency.)
+tải thư viện, và build những thư viện đó. (Chúng ta gọi những thư viện mà code của bạn cần là những dependency)
 
 Những chương trình Rust đơn giản nhất, như ví dụ bạn vừa viết chẳng hạn, không có dependency nào. Nên nếu chúng
 ta build chương trình “Hello, world!” với Cargo, Cargo sẽ chỉ giúp chúng ta build code.
