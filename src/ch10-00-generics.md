@@ -1,46 +1,29 @@
-# Generic Types, Traits, and Lifetimes
+# Generic, Traits và Lifetimes
 
-Every programming language has tools for effectively handling the duplication
-of concepts. In Rust, one such tool is *generics*: abstract stand-ins for
-concrete types or other properties. We can express the behavior of generics or
-how they relate to other generics without knowing what will be in their place
-when compiling and running the code.
+Hầu hết các ngôn ngữ lập trình hiện nay đều có các công cụ để giảm thiểu việc trùng lặp code. Đối với Rust, ta có *generics*: có thể coi là một kiểu dữ liệu dạng tổng quát thay thế cho các kiểu dữ liệu thông thường.
 
-Functions can take parameters of some generic type, instead of a concrete type
-like `i32` or `String`, in the same way a function takes parameters with
-unknown values to run the same code on multiple concrete values. In fact, we’ve
-already used generics in Chapter 6 with `Option<T>`, Chapter 8 with `Vec<T>`
-and `HashMap<K, V>`, and Chapter 9 with `Result<T, E>`. In this chapter, you’ll
-explore how to define your own types, functions, and methods with generics!
+Các tham số truyền vào trong hàm hoàn toàn có thể là các *generic*, khi đó ta sẽ không cần phải suy nghĩ quá nhiều về kiểu dữ liệu của tham số nữa (vd: `i32` hay `String`). Nếu bạn để ý, `Option<T>` trong chương 6, `Vec<T>` và `HashMap<K,V>` ở chương 8 hay `Result<T,E>` ở chương 9 đều sử dụng *generic*.
 
-First, we’ll review how to extract a function to reduce code duplication. We’ll
-then use the same technique to make a generic function from two functions that
-differ only in the types of their parameters. We’ll also explain how to use
-generic types in struct and enum definitions.
+Trong chương này, ta sẽ học cách định nghĩa kiểu dữ liệu, hàm và phương thức sử dụng *generic*!
 
-Then you’ll learn how to use *traits* to define behavior in a generic way. You
-can combine traits with generic types to constrain a generic type to accept
-only those types that have a particular behavior, as opposed to just any type.
+Đầu tiên, ta sẽ tìm hiểu cách giảm trùng lặp code khi sử dụng generic function cho các hàm chỉ có sự khác biệt về kiểu dữ liệu truyền vào. Đồng thời tìm hiểu thêm về generic trong struct và enum.
 
-Finally, we’ll discuss *lifetimes*: a variety of generics that give the
-compiler information about how references relate to each other. Lifetimes allow
-us to give the compiler enough information about borrowed values so that it can
-ensure references will be valid in more situations than it could without our
-help.
+Tiếp theo, *traits* sẽ là công cụ giúp tạo ra các phương thức tổng quát và trừu tượng (rất giống *interface* trong Java). 
 
-## Removing Duplication by Extracting a Function
+Trong Rust, generic type là một kiểu dữ liệu có thể chấp nhận nhiều kiểu dữ liệu khác nhau. Ví dụ, một generic type như `Vec<T>` có thể chứa bất kỳ kiểu dữ liệu nào, từ số nguyên đến chuỗi hay các struct. Tuy nhiên, đôi khi chúng ta muốn giới hạn kiểu dữ liệu được chấp nhận bởi generic type này để chỉ chấp nhận những kiểu dữ liệu có hành vi cụ thể.
 
-Generics allow us to replace specific types with a placeholder that represents
-multiple types to remove code duplication. Before diving into generics syntax,
-then, let’s first look at how to remove duplication in a way that doesn’t
-involve generic types by extracting a function that replaces specific values
-with a placeholder that represents multiple values. Then we’ll apply the same
-technique to extract a generic function! By looking at how to recognize
-duplicated code you can extract into a function, you’ll start to recognize
-duplicated code that can use generics.
+Điều này có thể được đạt được bằng cách kết hợp traits và generic types. Trong Rust, traits là một cách để mô tả các hành vi của một kiểu dữ liệu. Bằng cách kết hợp một trait với một generic type, chúng ta có thể giới hạn generic type đó chỉ chấp nhận các kiểu dữ liệu có hành vi tương ứng với trait đó.
 
-We begin with the short program in Listing 10-1 that finds the largest number
-in a list.
+Ví dụ, nếu chúng ta muốn tạo một generic type chỉ chấp nhận các kiểu dữ liệu có thể sắp xếp được, chúng ta có thể sử dụng trait Ord của Rust để giới hạn kiểu dữ liệu được chấp nhận bởi generic type này. Bằng cách này, chúng ta sẽ không thể sử dụng generic type này với các kiểu dữ liệu không thể sắp xếp được như chuỗi hay struct không hỗ trợ tính năng sắp xếp.
+
+Cuối cùng, ta sẽ bàn về *lifetimes*: Lifetime trong Rust là một khái niệm được sử dụng để quản lý việc sử dụng bộ nhớ động trong khi lập trình. Khi một biến được tạo ra, nó được lưu trữ trong bộ nhớ động của máy tính. Tuy nhiên, khi biến đó không còn được sử dụng, bộ nhớ đó cần được giải phóng để sử dụng cho các mục đích khác.
+
+Trong Rust, các biến và các giá trị của chúng có thể có các lifetime khác nhau. Lifetime đại diện cho thời gian mà một giá trị được lưu trữ trong bộ nhớ. Khi một biến được tạo ra, nó được gắn kèm với một lifetime, được biểu thị bằng ký tự `'a` (với `'a` có thể được thay bằng bất kỳ ký tự nào khác).
+
+Lifetime cho phép Rust xác định thời điểm mà một biến cần được giải phóng khỏi bộ nhớ động. Điều này giúp tránh các lỗi liên quan đến việc sử dụng bộ nhớ không hợp lý, chẳng hạn như truy cập đến vùng bộ nhớ đã được giải phóng hoặc truy cập đến vùng bộ nhớ không hợp lý. 
+
+## Sử dụng hàm để tránh lặp code
+Cùng bắt đầu với đoạn code sau:
 
 <span class="filename">Filename: src/main.rs</span>
 
@@ -48,77 +31,30 @@ in a list.
 {{#rustdoc_include ../listings/ch10-generic-types-traits-and-lifetimes/listing-10-01/src/main.rs:here}}
 ```
 
-<span class="caption">Listing 10-1: Finding the largest number in a list of
-numbers</span>
+<span class="caption">Listing 10-1: Tìm số lớn nhất trong chuỗi số</span>
 
-We store a list of integers in the variable `number_list` and place the first
-number in the list in a variable named `largest`. We then iterate through all
-the numbers in the list, and if the current number is greater than the number
-stored in `largest`, replace the number in that variable. However, if the
-current number is less than or equal to the largest number seen so far, the
-variable doesn’t change, and the code moves on to the next number in the list.
-After considering all the numbers in the list, `largest` should hold the
-largest number, which in this case is 100.
+Mảng các số được lưu bởi biến `number_list` và gán phần tử đầu tiên vào biến `largest`. Sau đó duyệt qua toàn bộ mảng, nếu số hiện tại lớn hơn số được lưu ở `largest`, tiến hành cập nhật giá trị lớn hơn đó vào `largest`. Trong bài này kết quả nhận được sẽ là 100.
 
-We've now been tasked with finding the largest number in two different lists of
-numbers. To do so, we can choose to duplicate the code in Listing 10-1 and use
-the same logic at two different places in the program, as shown in Listing 10-2.
-
+Giả sử có thêm một chuỗi số thứ 2, nhiệm vụ bây giờ là tìm số lớn nhất trong chuối số thứ 2 này. Vì vậy, ta có thể copy đoạn logic vừa làm phía trên xuống để áp dụng cho chuỗi thứ 2.
 <span class="filename">Filename: src/main.rs</span>
 
 ```rust
 {{#rustdoc_include ../listings/ch10-generic-types-traits-and-lifetimes/listing-10-02/src/main.rs}}
 ```
 
-<span class="caption">Listing 10-2: Code to find the largest number in *two*
-lists of numbers</span>
+<span class="caption">Listing 10-2: Tìm số lớn nhất trong từng chuỗi số</span>
 
-Although this code works, duplicating code is tedious and error prone. We also
-have to remember to update the code in multiple places when we want to change
-it.
+Mặc dù nó hoạt động ổn, nhưng đây là một cách viết code tồi khi đoạn logic trên bị lặp lại, ta sẽ cần đưa chúng vào trong một hàm.
 
-To eliminate this duplication, we’ll create an abstraction by defining a
-function that operates on any list of integers passed in a parameter. This
-solution makes our code clearer and lets us express the concept of finding the
-largest number in a list abstractly.
-
-In Listing 10-3, we extract the code that finds the largest number into a
-function named `largest`. Then we call the function to find the largest number
-in the two lists from Listing 10-2. We could also use the function on any other
-list of `i32` values we might have in the future.
-
+Tạo một hàm có tên `largest`. Gọi hàm này mỗi khi cần tìm số lơn nhất của chuỗi số.
 <span class="filename">Filename: src/main.rs</span>
 
 ```rust
 {{#rustdoc_include ../listings/ch10-generic-types-traits-and-lifetimes/listing-10-03/src/main.rs:here}}
 ```
 
-<span class="caption">Listing 10-3: Abstracted code to find the largest number
-in two lists</span>
+<span class="caption">Listing 10-3: Sử dụng hàm để tránh lặp code</span>
 
-The `largest` function has a parameter called `list`, which represents any
-concrete slice of `i32` values we might pass into the function. As a result,
-when we call the function, the code runs on the specific values that we pass
-in. Don’t worry about the syntax of the `for` loop for now. We aren’t
-referencing a reference to an `i32` here; we’re pattern matching and
-destructuring each `&i32` that the `for` loop gets so that `item` will be an
-`i32` inside the loop body. We’ll cover pattern matching in detail in [Chapter
-18][ch18]<!-- ignore -->.
-
-In sum, here are the steps we took to change the code from Listing 10-2 to
-Listing 10-3:
-
-1. Identify duplicate code.
-2. Extract the duplicate code into the body of the function and specify the
-   inputs and return values of that code in the function signature.
-3. Update the two instances of duplicated code to call the function instead.
-
-Next, we’ll use these same steps with generics to reduce code duplication. In
-the same way that the function body can operate on an abstract `list` instead
-of specific values, generics allow code to operate on abstract types.
-
-For example, say we had two functions: one that finds the largest item in a
-slice of `i32` values and one that finds the largest item in a slice of `char`
-values. How would we eliminate that duplication? Let’s find out!
+Cách làm trên giúp giảm thiểu việc lặp code, tuy nhiên nó chỉ tốt khi các chuỗi mà ta làm việc có kiểu `i32`. Khi kiểu dữ liệu khác đi, (giả sử `char` hoặc `float`) hàm này sẽ không thể sử dụng, lúc này *generic* sẽ phát huy hiệu quả.
 
 [ch18]: ch18-00-patterns.html
